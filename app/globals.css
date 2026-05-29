@@ -1,26 +1,165 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Beessential Brand Tokens ─────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary palette */
+  --bee-amber: #FFBD59;
+  --bee-sky: #A7D2DD;
+  --bee-yellow: #FFD370;
+
+  /* Secondary palette */
+  --bee-blue: #004AAD;
+  --bee-teal: #6CC4C7;
+  --bee-blue-gray: #ADC5D9;
+  --bee-orange: #FF914D;
+
+  /* Backgrounds & Text */
+  --bee-cream: #FCEFC7;
+  --bee-cream-dark: #f5e0a8;
+  --bee-text: #2C1A06;
+  --bee-text-muted: #6B4A1E;
+
+  /* shadcn tokens mapped to Beessential brand */
+  --background: #FCEFC7;
+  --foreground: #2C1A06;
+  --card: #fff8e7;
+  --card-foreground: #2C1A06;
+  --popover: #fff8e7;
+  --popover-foreground: #2C1A06;
+  --primary: #FFBD59;
+  --primary-foreground: #2C1A06;
+  --secondary: #A7D2DD;
+  --secondary-foreground: #2C1A06;
+  --muted: #f5e0a8;
+  --muted-foreground: #6B4A1E;
+  --accent: #FF914D;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(44, 26, 6, 0.12);
+  --input: rgba(44, 26, 6, 0.12);
+  --ring: #FFBD59;
+  --radius: 0.875rem;
+  --sidebar: #f5e0a8;
+  --sidebar-foreground: #2C1A06;
+  --sidebar-primary: #FFBD59;
+  --sidebar-primary-foreground: #2C1A06;
+  --sidebar-accent: #A7D2DD;
+  --sidebar-accent-foreground: #2C1A06;
+  --sidebar-border: rgba(44, 26, 6, 0.12);
+  --sidebar-ring: #FFBD59;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Beessential brand utilities */
+  --color-bee-amber: var(--bee-amber);
+  --color-bee-sky: var(--bee-sky);
+  --color-bee-yellow: var(--bee-yellow);
+  --color-bee-blue: var(--bee-blue);
+  --color-bee-teal: var(--bee-teal);
+  --color-bee-blue-gray: var(--bee-blue-gray);
+  --color-bee-orange: var(--bee-orange);
+  --color-bee-cream: var(--bee-cream);
+  --color-bee-cream-dark: var(--bee-cream-dark);
+  --color-bee-text: var(--bee-text);
+  --color-bee-text-muted: var(--bee-text-muted);
+
+  /* Font roles */
+  --font-sans: var(--font-lora), Georgia, serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-hand: var(--font-caveat), cursive;
+  --font-mono: monospace;
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Base Styles ───────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bee-cream);
+    color: var(--bee-text);
+    font-family: var(--font-lora), Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), Georgia, serif;
+    line-height: 1.25;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Focus States ──────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--bee-amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Custom Utilities ───────────────────────────────────────────────── */
+@layer utilities {
+  .font-hand {
+    font-family: var(--font-caveat), cursive;
+  }
+
+  .font-display {
+    font-family: var(--font-playfair), Georgia, serif;
+  }
 }
