@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion, type Variants } from "framer-motion"
 
 interface WordmarkProps {
   variant?: "light" | "dark"
@@ -19,12 +19,12 @@ export function Wordmark({ variant = "light", size = "md" }: WordmarkProps) {
   const textColor = variant === "light" ? "#A7D2DD" : "#2C1A06"
   const sparkleColor = variant === "light" ? "#FF914D" : "#FF914D"
 
-  const pulseVariants = {
+  const pulseVariants: Variants = {
     idle: { scale: 1, opacity: 0.9 },
     pulse: {
       scale: [1, 1.12, 1],
       opacity: [0.9, 1, 0.9],
-      transition: { duration: 2.4, repeat: Infinity, ease: "easeInOut" },
+      transition: { duration: 2.4, repeat: Infinity, ease: "easeInOut" as const },
     },
   }
 
